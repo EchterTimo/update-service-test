@@ -3,23 +3,16 @@ import requests
 from tkinter import messagebox
 import time
 
-# Define the current local version
-LOCAL_VERSION = "1.0.0"
-# URL for the version.txt file on GitHub
-VERSION_URL = f"https://raw.githubusercontent.com/EchterTimo/update-service-test/refs/heads/main/version.txt?id={
-    int(time.time())}"
+from github_lib import get_latest_version_name
+
+
+__version__ = "1.0.0"
 
 
 def check_for_updates():
-    try:
-        # Fetch the version.txt file from GitHub
-        response = requests.get(VERSION_URL)
-        if response.status_code == 200:
-            remote_version = response.text.strip()
-            if remote_version != LOCAL_VERSION:
-                show_update_popup()
-    except Exception as e:
-        print("Error checking for updates:", e)
+    latest_version = get_latest_version_name()
+    if latest_version > __version__:
+        show_update_popup()
 
 
 def show_update_popup():
