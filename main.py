@@ -1,11 +1,13 @@
 import tkinter as tk
 import requests
 from tkinter import messagebox
+import time
 
 # Define the current local version
 LOCAL_VERSION = "1.0.0"
 # URL for the version.txt file on GitHub
-VERSION_URL = "https://raw.githubusercontent.com/your-username/your-repo/main/version.txt"
+VERSION_URL = f"https://raw.githubusercontent.com/EchterTimo/update-service-test/refs/heads/main/version.txt?id={
+    int(time.time())}"
 
 
 def check_for_updates():
